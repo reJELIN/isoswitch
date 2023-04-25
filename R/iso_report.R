@@ -411,9 +411,9 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
     pull(cell_type)
 
   # relevel factors, isoforms by average total UMI sum
-  df <- mutate(df,
-               transcript_id = forcats::fct_reorder(transcript_id, as.numeric(avg), .fun = mean),
-               cell_type = fct_relevel(cell_type, levels = celltype_order))
+  #df <- mutate(df,
+  #             transcript_id = forcats::fct_reorder(transcript_id, as.numeric(avg), .fun = mean),
+  #             cell_type = fct_relevel(cell_type, levels = celltype_order))
 
   # force color mapping for each feature
   color_mapping <- select(meta, transcript_id, color) %>% tibble::deframe()
