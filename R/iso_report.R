@@ -56,23 +56,10 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   # [P2]_________________ { dotplot }
   # use same cell_type order in y axis as in p1
   p2 <- ._isoswitch_report.dotpot(obj, obj_assay, meta, celltype_order=p1_celltype_order)
-
-  print("PATCHWORK")
-  # [PATCHWORK ] _________________
-  pw <- loc_plot /
-    jct_plot  /
-    plot_spacer() /
-    (p1 | p2)
-
-  pw <- pw +
-    plot_annotation(title = gene,
-                    theme = theme(plot.title = element_text(size = 30))) +
-    # 'null' expands to available space
-    plot_layout(heights = unit(c(loc_h,  jct_h,  0.15,      5),
-                               c( 'cm',   'cm',  'cm', 'null')))
-
-
-  return(pw)
+  
+  obj_list=list("p1",=p1,"p2"=p2)
+ 
+  return(obj_list)
 
 }
 # ______________________________________________________________________________
