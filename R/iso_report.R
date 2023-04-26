@@ -139,7 +139,7 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   # build feature metadata (feature => short_name, color, order) shared by all panels
   meta <- data.frame( feature = ordered_isofs ) %>%
     separate(feature, into=c("gene_id", "transcript_id"), sep="\\.\\.", remove=FALSE) %>%
-    left_join(transcript_meta, by=c("transcript_id"="ensembl_transcript_id")) %>%
+    left_join(transcript_meta, by=c("transcript_id"="ensembl_transcript_id_version")) %>%
     mutate(color = custom_colors[1:length(isofs)])
 
   return(meta)
