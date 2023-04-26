@@ -75,8 +75,6 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   return(pw)
 
 }
-
-}
 # ______________________________________________________________________________
 
 #' Stripped-down version of isoswitch_report with only barplot
