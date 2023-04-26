@@ -291,9 +291,9 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   # get exons for this gene (only transcripts shown)
   exons <- gtf_df %>%
     filter(gene_name==gene,
-           transcript_id %in% meta$transcript_id,
+           transcript_id %in% meta$ensembl_transcript_id,
            type=="exon") %>%
-    left_join(meta, by="transcript_id")
+    left_join(meta, by=c("transcript_id"="ensembl_transcript_id"))
 
   # force color mapping for each feature
   manual_colors <- tibble::deframe(select(meta, external_transcript_name, color))
