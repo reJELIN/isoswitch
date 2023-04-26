@@ -183,8 +183,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   isofs <- meta$feature
   
   print(meta)
- print(obj)
- print(obj_assay)
+  print(obj)
+  print(obj_assay)
   print(DefaultAssay(obj))
   
   p2 <- DotPlot(obj, assay=obj_assay, features=isofs, scale=FALSE, cols="RdBu") + 
