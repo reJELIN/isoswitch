@@ -57,7 +57,7 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   # use same cell_type order in y axis as in p1
   p2 <- ._isoswitch_report.dotpot(obj, obj_assay, meta, celltype_order=p1_celltype_order)
   
-  obj_list=list("p1",=p1,"p2"=p2,"jct_p"=jct_plot,"loc_p"=loc_plot)
+  obj_list=list("p1"=p1,"p2"=p2,"jct_p"=jct_plot,"loc_p"=loc_plot)
  
   return(obj_list)
 
