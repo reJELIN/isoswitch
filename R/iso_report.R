@@ -151,6 +151,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
     separate(feature, into=c("gene_id", "transcript_id"), sep="\\.\\.", remove=FALSE) %>%
     left_join(transcript_meta, by=c("transcript_id"="ensembl_transcript_id_version")) %>%
     mutate(color = custom_colors[1:length(isofs)])
+ 
+  meta <- meta[!is.na(meta$ensembl_transcript_id),]
 
   return(meta)
 }
