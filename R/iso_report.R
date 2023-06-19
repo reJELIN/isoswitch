@@ -50,7 +50,7 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   print("umi counts")
   # [P1 _________________ { umi counts }
   p1 <- ._isoswitch_report.umi_counts(obj, obj_assay, gene, meta)
-  p1_celltype_order <- levels(p1$data$cell_type)
+  p1_celltype_order <- levels(as.factor(p1$data$cell_type))
   
   print("dotplot")
   # [P2]_________________ { dotplot }
