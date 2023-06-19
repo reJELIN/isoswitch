@@ -50,13 +50,13 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   print("umi counts")
   # [P1 _________________ { umi counts }
   p1 <- ._isoswitch_report.umi_counts(obj, obj_assay, gene, meta)
-  p1_celltype_order <- levels(as.factor(p1$data$cell_type))
+  p1_celltype_order <- levels(p1$data$cell_type)
   
   print("dotplot")
   # [P2]_________________ { dotplot }
   # use same cell_type order in y axis as in p1
-  p2 <- ._isoswitch_report.dotpot(obj, obj_assay, meta, celltype_order=unique(p1_celltype_order))
-  
+  p2 <- ._isoswitch_report.dotpot(obj, obj_assay, meta, celltype_order=p1_celltype_order)
+
   print("PATCHWORK")
   # [PATCHWORK ] _________________
   pw <- loc_plot /
@@ -149,10 +149,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   # build feature metadata (feature => short_name, color, order) shared by all panels
   meta <- data.frame( feature = ordered_isofs ) %>%
     separate(feature, into=c("gene_id", "transcript_id"), sep="\\.\\.", remove=FALSE) %>%
-    left_join(transcript_meta, by=c("transcript_id"="ensembl_transcript_id_version")) %>%
+    left_join(transcript_meta, by=c("transcript_id"="ensembl_transcript_id")) %>%
     mutate(color = custom_colors[1:length(isofs)])
- 
-  meta <- meta[!is.na(meta$ensembl_transcript_id),]
 
   return(meta)
 }
@@ -185,8 +183,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   isofs <- meta$feature
   
   print(meta)
-  print(obj)
-  print(obj_assay)
+ print(obj)
+ print(obj_assay)
   print(DefaultAssay(obj))
   
   p2 <- DotPlot(obj, assay=obj_assay, features=isofs, scale=FALSE, cols="RdBu") + 
@@ -303,9 +301,9 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   # get exons for this gene (only transcripts shown)
   exons <- gtf_df %>%
     filter(gene_name==gene,
-           transcript_id %in% meta$ensembl_transcript_id,
+           transcript_id %in% meta$transcript_id,
            type=="exon") %>%
-    left_join(meta, by=c("transcript_id"="ensembl_transcript_id"))
+    left_join(meta, by="transcript_id")
 
   # force color mapping for each feature
   manual_colors <- tibble::deframe(select(meta, external_transcript_name, color))
@@ -413,9 +411,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
     pull(cell_type)
 
   # relevel factors, isoforms by average total UMI sum
-  #df <- mutate(df,
-  #             transcript_id = forcats::fct_reorder(transcript_id, as.numeric(avg), .fun = mean),
-  #             cell_type = fct_relevel(cell_type, levels = celltype_order))
+  df <- mutate(df,
+               transcript_id = forcats::fct_reorder(transcript_id, as.numeric(avg), .fun = mean))
 
   # force color mapping for each feature
   color_mapping <- select(meta, transcript_id, color) %>% tibble::deframe()
