@@ -63,9 +63,9 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
 
   #  plot_annotation(title = gene,
   #                  theme = theme(plot.title = element_text(size = 30))) +
-    # 'null' expands to available space
+  # 'null' expands to available space
   #  plot_layout(heights = unit(c(loc_h,  jct_h,  0.15,      5),
-                               c( 'cm',   'cm',  'cm', 'null')))
+  #                             c( 'cm',   'cm',  'cm', 'null')))
 
 
   return(pw)
