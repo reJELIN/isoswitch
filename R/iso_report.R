@@ -61,7 +61,6 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   # [PATCHWORK ] _________________
   pw <- loc_plot | jct_plot  | p1 | p2 
 
-  #pw <- pw +
   #  plot_annotation(title = gene,
   #                  theme = theme(plot.title = element_text(size = 30))) +
     # 'null' expands to available space
