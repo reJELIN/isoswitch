@@ -59,16 +59,13 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
 
   print("PATCHWORK")
   # [PATCHWORK ] _________________
-  pw <- loc_plot /
-    jct_plot  /
-    plot_spacer() /
-    (p1 | p2)
+  pw <- loc_plot | jct_plot  | p1 | p2 
 
-  pw <- pw +
-    plot_annotation(title = gene,
-                    theme = theme(plot.title = element_text(size = 30))) +
+  #pw <- pw +
+  #  plot_annotation(title = gene,
+  #                  theme = theme(plot.title = element_text(size = 30))) +
     # 'null' expands to available space
-    plot_layout(heights = unit(c(loc_h,  jct_h,  0.15,      5),
+  #  plot_layout(heights = unit(c(loc_h,  jct_h,  0.15,      5),
                                c( 'cm',   'cm',  'cm', 'null')))
 
 
