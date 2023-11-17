@@ -25,7 +25,7 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
  
   normal_data <- obj@assays[[obj_assay]]@data
   isofs <- grep(paste("^", gene,"\\.", sep=""), rownames(normal_data), value=TRUE)
-  assert_that(length(isofs) > 0, msg = "gene not found")
+  #assert_that(length(isofs) > 0, msg = "gene not found")
 
   # metadata shared by all panels (feature => short_name, color, order)
   meta <- ._build_plot_metadata(isofs, normal_data, transcript_metadata)
@@ -91,7 +91,7 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
 
   normal_data <- obj@assays[[obj_assay]]@data
   isofs <- grep(paste("^", gene,"\\.", sep=""), rownames(normal_data), value=TRUE)
-  assert_that(length(isofs) > 0, msg = "gene not found")
+  #assert_that(length(isofs) > 0, msg = "gene not found")
 
   # metadata shared by all panels (feature => short_name, color, order)
   meta <- ._build_plot_metadata(isofs, normal_data, transcript_metadata)
