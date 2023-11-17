@@ -59,7 +59,7 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
 
   print("PATCHWORK")
 
- obj_list=list("p1",=p1,"p2"=p2,"jct_p"=jct_plot,"loc_p"=loc_plot)
+ obj_list=list("p1"=p1,"p2"=p2,"jct_p"=jct_plot,"loc_p"=loc_plot)
 
 
   return(obj_list)
