@@ -293,7 +293,7 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
     filter(gene_name==gene,
            transcript_id %in% meta$ensembl_transcript_id,,
            type=="exon") %>%
-    left_join(meta, by=c("transcript_id"="ensembl_transcript_id"))
+    left_join(meta, by=c("transcript_id"="ensembl_transcript_id_version"))
 
   # force color mapping for each feature
   manual_colors <- tibble::deframe(select(meta, external_transcript_name, color))
