@@ -58,17 +58,11 @@ isoswitch_report <- function(obj, obj_assay, marker_list, gene, gtf_df, transcri
   p2 <- ._isoswitch_report.dotpot(obj, obj_assay, meta, celltype_order=p1_celltype_order)
 
   print("PATCHWORK")
-  # [PATCHWORK ] _________________
-  pw <- loc_plot | jct_plot  | p1 | p2 
 
-  #  plot_annotation(title = gene,
-  #                  theme = theme(plot.title = element_text(size = 30))) +
-  # 'null' expands to available space
-  #  plot_layout(heights = unit(c(loc_h,  jct_h,  0.15,      5),
-  #                             c( 'cm',   'cm',  'cm', 'null')))
+ obj_list=list("p1",=p1,"p2"=p2,"jct_p"=jct_plot,"loc_p"=loc_plot)
 
 
-  return(pw)
+  return(obj_list)
 
 }
 # ______________________________________________________________________________
@@ -297,9 +291,9 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
   # get exons for this gene (only transcripts shown)
   exons <- gtf_df %>%
     filter(gene_name==gene,
-           transcript_id %in% meta$transcript_id,
+           transcript_id %in% meta$ensembl_transcript_id,,
            type=="exon") %>%
-    left_join(meta, by="transcript_id")
+    left_join(meta, by=c("transcript_id"="ensembl_transcript_id"))
 
   # force color mapping for each feature
   manual_colors <- tibble::deframe(select(meta, external_transcript_name, color))
@@ -407,8 +401,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
     pull(cell_type)
 
   # relevel factors, isoforms by average total UMI sum
-  df <- mutate(df,
-               transcript_id = forcats::fct_reorder(transcript_id, as.numeric(avg), .fun = mean))
+  #df <- mutate(df,
+  #             transcript_id = forcats::fct_reorder(transcript_id, as.numeric(avg), .fun = mean))
 
   # force color mapping for each feature
   color_mapping <- select(meta, transcript_id, color) %>% tibble::deframe()
