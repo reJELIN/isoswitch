@@ -392,8 +392,8 @@ isoswitch_report_short <- function(obj, obj_assay, marker_list, gene, transcript
 ._isoswitch_report.umi_counts <- function(obj, obj_assay, gene, meta, legend=FALSE) {
 
   # get celltype_features data for each cell type
-  df <- map_df(levels(obj@active.ident),
-               celltype_features, obj=obj, count_matrix=obj@assays[[obj_assay]]@counts, features=meta$feature)
+  #df <- map_df(levels(obj@active.ident),
+  #             celltype_features, obj=obj, count_matrix=obj@assays[[obj_assay]]@counts, features=meta$feature)
 
   # sort cell types by expresion of major isoform - reuse sorting in meta
   celltype_order <- filter(df, transcript_id == meta$transcript_id[[1]]) %>%
